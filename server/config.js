@@ -15,25 +15,7 @@ class Server{
     };
 
     routes(){
-        // this.app.post('/api/preguntas', async (req, res) => {
-        //     try {
-        //         const { pregunta } = req.body;
-        
-        //         if (!pregunta || typeof pregunta !== 'string') {
-        //             return res.status(400).json({ error: 'La pregunta es inválida' });
-        //         }
-        
-        //         const result = await model.generateContent(pregunta);
-        //         console.log(result);
-        
-        //         const respuesta = result?.response?.text().slice(0, MAX_RESPONSE_LENGTH) || 'Respuesta no disponible.';
-        //         res.status(200).json({ respuesta });
-        
-        //     } catch (error) {
-        //         console.error('Error al comunicarse con Google Generative AI:', error);
-        //         res.status(500).json({ error: 'Hubo un problema al procesar la solicitud.' });
-        //     }
-        // });
+        this.app.use('api/preguntas', require('../routes/preguntas.routes'))
     };
 
     listen(){
