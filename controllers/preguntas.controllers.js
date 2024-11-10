@@ -1,13 +1,15 @@
+// import serviciosPreguntas from '../services/preguntas.services'
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 //GET
-const ObtenerTodasPreguntas = (req, res) => {
+const ObtenerTodasPreguntas = async(req, res) => {
     try {
-        const id = Number(req.query.id)
+        const id = (req.query.id)
         if (id) {
-            const pregunta = preguntas.find((preg) => preg.id === id)
+            const pregunta = await preguntas.find((preg) => preg.id === id)
             res.status(200).json(pregunta)
         } else {
+            const preguntas = await preguntas.ObtenerPreguntas()
             res.status(200).json(preguntas)
         }
     } catch (error) {
@@ -40,9 +42,9 @@ const CrearPregunta = async (req, res) => {
 };
 
 //PUT
-const EditarPregunta = (req, res) => {
+const EditarPregunta = async (req, res) => {
     try {
-        const id = Number(req.params.idPregunta)
+        const id = req.params.idPregunta
         const posPregEnArray = preguntas.findIndex((pregunta) => pregunta.id === id)
 
         const preguntaEditada = {
@@ -60,9 +62,9 @@ const EditarPregunta = (req, res) => {
 };
 
 //DELETE
-const EliminarPregunta = (req, res) => {
+const EliminarPregunta = async(req, res) => {
     try {
-        const id = Number(req.params.idPregunta)
+        const id = req.params.idPregunta
         const preguntasNoBorradas = preguntas.filter((pregunta) => pregunta.id !== id)
 
         preguntas = preguntasNoBorradas

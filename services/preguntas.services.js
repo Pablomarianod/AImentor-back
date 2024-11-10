@@ -1,4 +1,5 @@
-const preguntas = []
+import PreguntaModel from "../models/pregunta.schema";
+
 
 const nuevaPregunta = (pregunta) => {
     try {
@@ -49,49 +50,25 @@ const obtenerPregunta = (idPregunta) => {
     }
 };
 
-const modificarPregunta = (idPregunta, body) => {
+const modificarPregunta = async (idPregunta, body) => {
     try {
-        const posPregunta = preguntas.findIndex((preg) => preg.id === idPregunta);
+        const preguntaEditada = await PreguntaModel.findByIdAndUpdate({ _id: idPregunta }, body)
 
-        const preguntaModificada = {
-            id: idPregunta,
-            ...body
-        };
-        preguntas[posPregunta] = preguntaModificada
-
-        return {
-            pregunta,
-            msg: 'Pregunta modificada',
-            statusCode: 200
-        };
+        return preguntaEditada
     } catch (error) {
-        return {
-            msg: 'Error al modificar la pregunta',
-            statusCode: 500,
-            error
-        };
+        console.log(error)
     }
 };
 
-const eliminarPregunta = (idPregunta) => {
+const eliminarPregunta = async (idPregunta) => {
     try {
-        const posPregunta = preguntas.findIndex((preg) => preg.id === idPregunta);
-        preguntas.splice(posPregunta, 1)
-
-        return {
-            msg: 'Pregunta eliminada',
-            statusCode: 200
-        };
+        await PreguntaModel.findByIdAndDelete({ _id: idPregunta })
     } catch (error) {
-        return {
-            msg: 'Error al eliminar la pregunta',
-            statusCode: 500,
-            error
-        };
+        console.log(error)
     }
 };
 
-module.exports = {
+export {
     nuevaPregunta,
     obtenerPreguntas,
     obtenerPregunta,
