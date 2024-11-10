@@ -1,3 +1,5 @@
+import { GoogleGenerativeAI } from '@google/generative-ai';
+
 //GET
 const ObtenerTodasPreguntas = (req, res) => {
     try {
@@ -15,6 +17,9 @@ const ObtenerTodasPreguntas = (req, res) => {
 
 //POST
 const CrearPregunta = async (req, res) => {
+    const MAX_RESPONSE_LENGTH = 200;
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     try {
         const { pregunta } = req.body;
 

@@ -9,10 +9,10 @@ router.get('/', ObtenerTodasPreguntas)
 router.post('/', CrearPregunta)
 
 //PUT
-router.put('', EditarPregunta)
+router.put('/:idPregunta', EditarPregunta)
 
 //DELETE
-router.delete('', EliminarPregunta)
+router.delete('/:idPregunta', EliminarPregunta)
 
 
 export default router;

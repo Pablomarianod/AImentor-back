@@ -17,7 +17,7 @@ class Server{
     };
 
     routes(){
-        this.app.use('api/preguntas', preguntasRoutes)
+        this.app.use('/api/preguntas', preguntasRoutes)
     };
 
     listen(){
