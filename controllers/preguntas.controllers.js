@@ -69,7 +69,7 @@ const EliminarPregunta = (req, res) => {
     }
 };
 
-module.exports = {
+export {
     ObtenerTodasPreguntas,
     CrearPregunta,
     EditarPregunta,

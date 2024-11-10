@@ -1,18 +1,18 @@
 import express from 'express';
-import { CrearPregunta, EditarPregunta, EliminarPregunta, ObtenerTodasPreguntas } from '../controllers/preguntas.controllers';
+import { CrearPregunta, EditarPregunta, EliminarPregunta, ObtenerTodasPreguntas } from '../controllers/preguntas.controllers.js';
 const router = express.Router();
 
 //GET
 router.get('/', ObtenerTodasPreguntas)
 
 //POST
-router.post('', CrearPregunta)
+router.post('/', CrearPregunta)
 
 //PUT
-router.post('', EditarPregunta)
+router.put('', EditarPregunta)
 
 //DELETE
-router.post('', EliminarPregunta)
+router.delete('', EliminarPregunta)
 
 
-module.exports = router;
+export default router;

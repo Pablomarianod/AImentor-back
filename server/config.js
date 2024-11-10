@@ -1,5 +1,7 @@
 import express from 'express';
-import cors from 'cors'
+import cors from 'cors';
+import preguntasRoutes from '../routes/preguntas.routes.js';
+import '../db/configdb.js';
 
 class Server{
     constructor(){
@@ -15,7 +17,7 @@ class Server{
     };
 
     routes(){
-        this.app.use('api/preguntas', require('../routes/preguntas.routes'))
+        this.app.use('api/preguntas', preguntasRoutes)
     };
 
     listen(){
