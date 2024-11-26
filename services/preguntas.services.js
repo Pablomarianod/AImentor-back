@@ -1,9 +1,10 @@
 import PreguntaModel from "../models/pregunta.schema";
 
 
-const nuevaPregunta = (pregunta) => {
+const nuevaPregunta = async (pregunta) => {
     try {
-        preguntas.push({ id: crypto.randomUUID(), pregunta });
+        const pregunta = new PreguntaModel(body);
+        await pregunta.save()
         return {
             msg: 'Pregunta creada',
             statusCode: 201
@@ -17,8 +18,9 @@ const nuevaPregunta = (pregunta) => {
     }
 };
 
-const obtenerPreguntas = () => {
+const obtenerPreguntas = async () => {
     try {
+        const preguntas = await PreguntaModel.find();
         return {
             preguntas,
             msg: 'Todas las preguntas',
@@ -33,9 +35,9 @@ const obtenerPreguntas = () => {
     }
 };
 
-const obtenerPregunta = (idPregunta) => {
+const obtenerPregunta = async (idPregunta) => {
     try {
-        const pregunta = preguntas.find((preg) => preg.id === idPregunta);
+        const pregunta = await PreguntaModel.findById(idPregunta)
         return {
             pregunta,
             msg: 'Pregunta buscada',
@@ -52,20 +54,40 @@ const obtenerPregunta = (idPregunta) => {
 
 const modificarPregunta = async (idPregunta, body) => {
     try {
-        const preguntaEditada = await PreguntaModel.findByIdAndUpdate({ _id: idPregunta }, body)
+        await PreguntaModel.findById({ _id: idPregunta }, body);
 
-        return preguntaEditada
+        return {
+            msg: 'Pregunta modificada',
+            statusCode: 200
+        };
+
     } catch (error) {
         console.log(error)
+        return {
+            msg: 'Error al modificar la pregunta',
+            statusCode: 500,
+            error
+        };
     }
 };
 
 const eliminarPregunta = async (idPregunta) => {
-    try {
-        await PreguntaModel.findByIdAndDelete({ _id: idPregunta })
-    } catch (error) {
-        console.log(error)
-    }
+
+    const preguntaExiste = await PreguntaModel.findById(idPregunta);
+    if (preguntaExiste) {
+
+        await PreguntaModel.findByIdAndDelete({ _id: idPregunta });
+        return {
+            msg: 'Pregunta eliminada',
+            statusCode: 200
+        };
+    } else {
+        return {
+            msg: 'No se encontró el ID',
+            statusCode: 400,
+            error
+        };
+    };
 };
 
 export {

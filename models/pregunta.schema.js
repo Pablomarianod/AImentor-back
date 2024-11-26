@@ -24,7 +24,7 @@ export default PreguntaModel;
 // }
 
 
-//Colección interacciones
+// Colección interacciones
 
 // {
 //   "_id": "ObjectId",
