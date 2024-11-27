@@ -9,25 +9,30 @@ import {
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 //GET
-const ObtenerTodasPreguntas = (req, res) => {
-    const result = obtenerPreguntas()
+const ObtenerTodasPreguntas = async (req, res) => {
+    const result = await obtenerPreguntas()
 
 
     if (result.statusCode === 200) {
 
-        res.status(200).json({ msg: result.msg })
+        res.status(200).json({
+            msg: result.msg,
+            preguntas: result.preguntas,
+        })
     } else {
-
         res.status(500).json({ msg: result.msg })
     }
 
 };
 
-const obtenerUnaPregunta = (req, res) => {
-    const result = obtenerPregunta(req.params.idPregunta)
+const obtenerUnaPregunta = async (req, res) => {
+    const result = await obtenerPregunta(req.params.idPregunta)
 
     if (result.statusCode === 200) {
-        res.status(200).json({ msg: result.msg })
+        res.status(200).json({
+            msg: result.msg,
+            pregunta: result.pregunta,
+        })
     } else {
         res.status(500).json({ msg: result.msg })
     }

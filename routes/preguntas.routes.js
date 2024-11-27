@@ -1,9 +1,12 @@
 import express from 'express';
-import { CrearPregunta, EditarPregunta, EliminarPregunta, ObtenerTodasPreguntas } from '../controllers/preguntas.controllers.js';
+import { CrearPregunta, EditarPregunta, EliminarPregunta, ObtenerTodasPreguntas, obtenerUnaPregunta } from '../controllers/preguntas.controllers.js';
 const router = express.Router();
 
 //GET
 router.get('/', ObtenerTodasPreguntas)
+
+router.get('/:idPregunta', obtenerUnaPregunta);
+
 
 //POST
 router.post('/', CrearPregunta)
