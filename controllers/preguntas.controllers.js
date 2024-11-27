@@ -80,7 +80,7 @@ const CrearPregunta = async (req, res) => {
 //PUT
 const EditarPregunta = async (req, res) => {
 
-    const result = modificarPregunta(req.params.idPregunta)
+    const result =await modificarPregunta(req.params.idPregunta)
 
     if (result.statusCode === 200) {
         res.status(200).json({ msg: result.msg })
@@ -90,8 +90,8 @@ const EditarPregunta = async (req, res) => {
 };
 
 //DELETE
-const EliminarPregunta = (req, res) => {
-    const result = eliminarPregunta(req.params.idPregunta)
+const EliminarPregunta = async(req, res) => {
+    const result =await eliminarPregunta(req.params.idPregunta)
 
     if (result.statusCode === 200) {
         res.status(200).json({ msg: result.msg })

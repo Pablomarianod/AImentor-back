@@ -73,10 +73,10 @@ const modificarPregunta = async (idPregunta, body) => {
 
 const eliminarPregunta = async (idPregunta) => {
 
-    const preguntaExiste = await PreguntaModel.findById(idPregunta);
+    const preguntaExiste = await PreguntaModel.findByIdAndDelete(idPregunta);
     if (preguntaExiste) {
 
-        await PreguntaModel.findByIdAndDelete({ _id: idPregunta });
+        // await PreguntaModel.findByIdAndDelete({ _id: idPregunta });
         return {
             msg: 'Pregunta eliminada',
             statusCode: 200
@@ -85,7 +85,6 @@ const eliminarPregunta = async (idPregunta) => {
         return {
             msg: 'No se encontró la pregunta',
             statusCode: 404,
-            error
         };
     };
 };
