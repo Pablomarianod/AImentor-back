@@ -35,7 +35,7 @@ const obtenerUnaPregunta = (req, res) => {
 
 //POST
 const CrearPregunta = async (req, res) => {
-    //    const result = serviciosPreguntas.nuevaPregunta(req.body) REVISAR 
+
     const MAX_RESPONSE_LENGTH = 200;
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
@@ -51,13 +51,20 @@ const CrearPregunta = async (req, res) => {
 
         const respuesta = result?.response?.text().slice(0, MAX_RESPONSE_LENGTH) || 'Respuesta no disponible.';
 
-         // Guarda la pregunta y la respuesta
-         const saveResult = nuevaPregunta({ pregunta, respuesta });
+        const saveResult = await nuevaPregunta({
+            preguntaUsuario: pregunta,
+            respuestaIA: respuesta
+        });
 
-         res.status(saveResult.statusCode).json({ 
-             msg: saveResult.msg,
-             respuesta
-         });
+        if (saveResult.statusCode === 201) {
+            res.status(201).json({
+                msg: saveResult.msg,
+                preguntaUsuario: pregunta,
+                respuestaIA: respuesta
+            });
+        } else {
+            res.status(saveResult.statusCode).json({ msg: saveResult.msg });
+        }
 
     } catch (error) {
         console.error('Error al comunicarse con Google Generative AI:', error);

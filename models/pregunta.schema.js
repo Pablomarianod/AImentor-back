@@ -1,9 +1,13 @@
 import { Schema, model } from "mongoose"
 
 const PreguntaSchema = new Schema({
-    nombre: {
+    preguntaUsuario: {
         type: String,
         required: true
+    },
+    respuestaIA: {
+        type: String,
+        required: true,
     }
 });
 

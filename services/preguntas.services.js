@@ -1,10 +1,10 @@
-import PreguntaModel from "../models/pregunta.schema";
+import PreguntaModel from "../models/pregunta.schema.js";
 
 
 const nuevaPregunta = async (pregunta) => {
     try {
-        const pregunta = new PreguntaModel(body);
-        await pregunta.save()
+        const nuevaPreg = new PreguntaModel(pregunta);
+        await nuevaPreg.save();
         return {
             msg: 'Pregunta creada',
             statusCode: 201
@@ -54,7 +54,7 @@ const obtenerPregunta = async (idPregunta) => {
 
 const modificarPregunta = async (idPregunta, body) => {
     try {
-        await PreguntaModel.findById({ _id: idPregunta }, body);
+        await PreguntaModel.findByIdAndUpdate({ _id: idPregunta }, body);
 
         return {
             msg: 'Pregunta modificada',
@@ -83,8 +83,8 @@ const eliminarPregunta = async (idPregunta) => {
         };
     } else {
         return {
-            msg: 'No se encontró el ID',
-            statusCode: 400,
+            msg: 'No se encontró la pregunta',
+            statusCode: 404,
             error
         };
     };
