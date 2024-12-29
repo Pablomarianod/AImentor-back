@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import preguntasRoutes from '../routes/preguntas.routes.js';
 import '../db/configdb.js';
+import morgan from 'morgan';
 
 class Server{
     constructor(){
@@ -14,6 +15,7 @@ class Server{
     middleware(){
         this.app.use(express.json());
         this.app.use(cors());
+        this.app.use(morgan());
     };
 
     routes(){

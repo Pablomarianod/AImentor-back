@@ -17,6 +17,7 @@
     "express": "^4.21.0",
     "gemini-ai": "^2.2.1",
     "mongoose": "^8.7.2",
+    "morgan": "^1.10.0",
     "openai": "^4.64.0"
   }
 }
