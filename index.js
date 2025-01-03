@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import Server from '../AImentor-back/server/config.js'
+import Server from './server/config'
 
 const server = new Server()
 
