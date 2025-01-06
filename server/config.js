@@ -16,7 +16,7 @@ class Server{
         this.app.use(express.json());
         // this.app.use(cors());
         const corsOptions = {
-            origin: ['https://kaizenai.netlify.app/', 'http://localhost:5173'], // Añade tu dominio de Netlify y cualquier otro que necesites para desarrollo
+            origin: ['https://kaizenai.netlify.app', 'http://localhost:5173'], // Añade tu dominio de Netlify y cualquier otro que necesites para desarrollo
             methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
             credentials: true, // Si necesitas enviar cookies o encabezados de autorización
         };
